@@ -69,7 +69,7 @@ def draw_artificial_horizon(roll, pitch):
     pygame.draw.rect(screen, SKY_BLUE, (0, 0, WIDTH, sky_height))
     pygame.draw.rect(screen, DIRT_BROWN, (0, HEIGHT - ground_height, WIDTH, ground_height))
 
-    airplane_icon = pygame.image.load("airplane.png")
+    airplane_icon = pygame.image.load("airplane.bmp")
     airplane_icon = pygame.transform.scale(airplane_icon, (150, 150))
     rotated_airplane = pygame.transform.rotate(airplane_icon, roll)
     airplane_rect = rotated_airplane.get_rect(center=(WIDTH // 2, HEIGHT // 2))
