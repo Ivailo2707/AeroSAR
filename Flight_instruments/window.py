@@ -4,7 +4,7 @@ import sys
 from artificial_horizon import get_pitch_roll
 from accelerometer import get_acceleration, get_speed
 from thermal_camera import map_temperature_to_color, sensor
-
+from ..Autopilot.circle_mode import autopilot_circle_mode
 
 pygame.init()
 
@@ -96,5 +96,6 @@ while running:
 
     
     pygame.display.update()
+    # autopilot_circle_mode(ah_pitch, ah_roll)
 
 pygame.quit()
