@@ -1,6 +1,6 @@
 import pygame
 import sys
-import random
+# import random
 from artificial_horizon import get_pitch_roll
 from accelerometer import get_acceleration, get_speed
 from thermal_camera import map_temperature_to_color, sensor
@@ -34,8 +34,8 @@ thermal_camera_area = pygame.Rect(500, 50, THERMAL_CAMERA_WIDTH, THERMAL_CAMERA_
 #     red = int((temp - 20) * (255 / 20))
 #     return red, 0, blue
 
-def simulate_thermal_data():
-    return [[random.uniform(20, 40) for _ in range(SENSOR_COLS)] for _ in range(SENSOR_ROWS)]
+# def simulate_thermal_data():
+#     return [[random.uniform(20, 40) for _ in range(SENSOR_COLS)] for _ in range(SENSOR_ROWS)]
 
 def draw_artificial_horizon(screen, roll, pitch, speed, altitude):
     horizon_line_length = 50
