@@ -1,13 +1,17 @@
 import pygame
 import sys
 import random
+from artificial_horizon import get_pitch_roll
+from accelerometer import get_acceleration, get_speed
+from thermal_camera import map_temperature_to_color, sensor
+
 
 pygame.init()
 
 WINDOW_WIDTH = 1000  
 WINDOW_HEIGHT = 400
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-pygame.display.set_caption("Combined Pygame Windows")
+pygame.display.set_caption("Flight Instruments")
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -25,10 +29,10 @@ THERMAL_CAMERA_WIDTH = SENSOR_COLS * cell_size
 THERMAL_CAMERA_HEIGHT = SENSOR_ROWS * cell_size
 thermal_camera_area = pygame.Rect(500, 50, THERMAL_CAMERA_WIDTH, THERMAL_CAMERA_HEIGHT)
 
-def map_temperature_to_color(temp):
-    blue = 255 - int((temp - 20) * (255 / 20))
-    red = int((temp - 20) * (255 / 20))
-    return red, 0, blue
+# def map_temperature_to_color(temp):
+#     blue = 255 - int((temp - 20) * (255 / 20))
+#     red = int((temp - 20) * (255 / 20))
+#     return red, 0, blue
 
 def simulate_thermal_data():
     return [[random.uniform(20, 40) for _ in range(SENSOR_COLS)] for _ in range(SENSOR_ROWS)]
@@ -60,8 +64,8 @@ def draw_artificial_horizon(screen, roll, pitch, speed, altitude):
     font = pygame.font.Font(None, 24)
     text_pitch = font.render(f"Pitch: {pitch:.2f} degrees", True, WHITE)
     text_roll = font.render(f"Roll: {roll:.2f} degrees", True, WHITE)
-    text_speed = font.render(f"Speed: {speed} mph", True, WHITE)
-    text_altitude = font.render(f"Altitude: {altitude} ft", True, WHITE)
+    text_speed = font.render(f"Speed: {speed} km/h", True, WHITE)
+    text_altitude = font.render(f"Altitude: {altitude} m", True, WHITE)
 
     screen.blit(text_pitch, (artificial_horizon_area.x + 10, artificial_horizon_area.y + 10))
     screen.blit(text_roll, (artificial_horizon_area.x + 10, artificial_horizon_area.y + 40))
@@ -74,11 +78,16 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    draw_artificial_horizon(window, 0, 0, 150, 10000)  
+    ah_pitch, ah_roll = get_pitch_roll()
+    s_acceleration = get_acceleration()
+    s_speed = get_speed(s_acceleration)-(3.5)
+    if s_speed < 0 :
+        s_speed = 0
+    draw_artificial_horizon(window, ah_pitch, ah_roll, s_speed, 0)  
 
 
     window.fill(WHITE, thermal_camera_area)
-    temperatures = simulate_thermal_data()
+    temperatures = sensor.pixels
     for x in range(SENSOR_COLS):
         for y in range(SENSOR_ROWS):
             temp = temperatures[y][x]

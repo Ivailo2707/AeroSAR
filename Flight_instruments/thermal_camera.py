@@ -35,22 +35,22 @@ def map_temperature_to_color(temp):
     return tuple(int(c * 255) for c in gradient[index].rgb)
 
 
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+# running = True
+# while running:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
 
-    temperatures = sensor.pixels
+#     temperatures = sensor.pixels
 
-    game_display.fill((0, 0, 0)) 
+#     game_display.fill((0, 0, 0)) 
 
-    for x in range(SENSOR_COLS):
-        for y in range(SENSOR_ROWS):
-            temp = temperatures[y][x]
-            color = map_temperature_to_color(temp)
-            pygame.draw.rect(game_display, color, (x * cell_size, y * cell_size, cell_size, cell_size))
+#     for x in range(SENSOR_COLS):
+#         for y in range(SENSOR_ROWS):
+#             temp = temperatures[y][x]
+#             color = map_temperature_to_color(temp)
+#             pygame.draw.rect(game_display, color, (x * cell_size, y * cell_size, cell_size, cell_size))
 
-    pygame.display.update()
+#     pygame.display.update()
 
-pygame.quit()
+# pygame.quit()
