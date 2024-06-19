@@ -14,8 +14,8 @@ GYRO_SCALE = 131.0
 
 pygame.init()
 WIDTH, HEIGHT = 600, 400
-#screen = pygame.display.set_mode((WIDTH, HEIGHT))
-#pygame.display.set_caption("Artificial Horizon")
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Artificial Horizon")
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)

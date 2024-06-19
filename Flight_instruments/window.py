@@ -4,7 +4,7 @@ import sys
 from artificial_horizon import get_pitch_roll
 from accelerometer import get_acceleration, get_speed
 from thermal_camera import map_temperature_to_color, sensor
-from ..Autopilot.circle_mode import autopilot_circle_mode
+#from ..Autopilot.circle_mode import autopilot_circle_mode
 
 pygame.init()
 
@@ -55,7 +55,7 @@ def draw_artificial_horizon(screen, roll, pitch, speed, altitude):
                                           artificial_horizon_area.y + artificial_horizon_area.height - ground_height,
                                           artificial_horizon_area.width, ground_height))
 
-    airplane_icon = pygame.image.load("airplane.bmp")
+    airplane_icon = pygame.image.load("airplane.png")
     airplane_icon = pygame.transform.scale(airplane_icon, (150, 150))
     rotated_airplane = pygame.transform.rotate(airplane_icon, roll)
     airplane_rect = rotated_airplane.get_rect(center=(horizon_center_x, horizon_center_y))
