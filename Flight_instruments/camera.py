@@ -1,8 +1,11 @@
 from picamera import PiCamera
 from time import sleep
 
-camera = PiCamera()
+def Camera():
+    camera = PiCamera()
 
-camera.start_preview()
-sleep(5)
-camera.stop_preview()
+    try:
+        camera.start_preview()
+        
+    except KeyboardInterrupt:
+        camera.stop_preview()
